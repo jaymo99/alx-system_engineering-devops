@@ -8,3 +8,12 @@ Read about regexp:
 * [](https://intranet.alxswe.com/rltoken/VOQCF4_WTOCyQ92h0dGPyA)Play with regexp (or compose them)
 * [Ruby](https://intranet.alxswe.com/rltoken/AxIYawIN6NUQsiIOI4Ru7Q)
 * [PHP/Javascript/Python](https://intranet.alxswe.com/rltoken/Ww6za0Ha2TvoDXFD2j7TjQ)
+
+
+## Resources
+* Regular expressions -basics
+* Regular expressions -advanced
+* Rubular is your best friend
+* Use a regular expression against a problem: now you have 2 problems
+* Learn Regular Expressions with simple, interactive exercises
+
