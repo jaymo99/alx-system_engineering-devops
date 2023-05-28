@@ -16,8 +16,16 @@
 * [What is HTTPS](https://intranet.alxswe.com/rltoken/c0zs2MxrmxFLsCPOizxq6g)
 * [What is a firewall](https://intranet.alxswe.com/rltoken/j6idMcUTyNEDj1oYDQFmUw)
 
+
 ## Tasks
-1. Simple web stack.<br> A lot of websites are powered by simple web infrastructure, a lot of time it is composed of a single server with a [LAMP stack](https://en.wikipedia.org/wiki/LAMP_%28software_bundle%29). <br>On a whiteboard, design a one server web infrastructure that hosts the website that is reachable via `www.foobar.com`. Start your explanation by having a user wanting to access your website.<br>Requirements:
+
+0. Simple web stack.
+
+	A lot of websites are powered by simple web infrastructure, a lot of time it is composed of a single server with a [LAMP stack](https://en.wikipedia.org/wiki/LAMP_%28software_bundle%29).
+
+	On a whiteboard, design a one server web infrastructure that hosts the website that is reachable via `www.foobar.com`. Start your explanation by having a user wanting to access your website.
+
+	Requirements:
 
 	* You must use:
 		- 1 server
@@ -39,7 +47,10 @@
 		- Downtime when maintenance needed (like deploying new code web server needs to be restarted)
 		- Cannot scale if too much incoming traffic
 
-2. Distributed web infrastructure
+<br>
+
+1. Distributed web infrastructure
+
 	On a whiteboard, design a three server web infrastructure that hosts the website `www.foobar.com`.
 
 	Requirements:
@@ -62,7 +73,10 @@
 		- Security issues (no firewall, no HTTPS)
 		- No monitoring
 
+<br>
+
 2. Secured and monitored web infrastructure
+
 	On a whiteboard, design a three server web infrastructure that hosts the website `www.foobar.com`, it must be secured, serve encrypted traffic, and be monitored.
 
 	Requirements:
