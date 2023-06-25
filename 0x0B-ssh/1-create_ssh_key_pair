@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# connects to a server using ssh
+
+ssh-keygen -f school -b 4096 -N "betty"
