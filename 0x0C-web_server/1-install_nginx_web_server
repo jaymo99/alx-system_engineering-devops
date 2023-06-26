@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Configures NGINX on a new Ubuntu machine
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+echo "y" | sudo ufw enable
+sudo ufw allow 'Nginx HTTP' -y
+sudo apt-get -y install curl
+
+# Assign ownership to the account that we are currently signed in to
+sudo chown -R "$USER":"$USER" /var/www/html
+sudo chmod -R 755 /var/www
+
+echo "Hello World!" > /var/www/html/index.html
+sudo service nginx start
