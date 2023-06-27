@@ -15,4 +15,7 @@ echo "Hello World!" > /var/www/html/index.html
 # setup redirection
 sudo sed -i "/server_name/ a \\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
 
+# custom error 404 page
+echo "Ceci n'est pas une page" > /var/www/html/404.html
+sudo sed -i "/server_name _;/ a\\\terror_page 404 /404.html;" /etc/nginx/sites-available/default 
 sudo service nginx restart
