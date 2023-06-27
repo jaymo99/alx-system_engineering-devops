@@ -3,8 +3,6 @@
 
 sudo apt-get -y update
 sudo apt-get -y install nginx
-#echo "y" | sudo ufw enable
-#sudo ufw allow 'Nginx HTTP'
 sudo apt-get -y install curl
 
 # Assign ownership to the account that we are currently signed in to
@@ -12,4 +10,7 @@ sudo chown -R "$USER":"$USER" /var/www/html
 sudo chmod -R 755 /var/www
 
 echo "Hello World!" > /var/www/html/index.html
-sudo service nginx start
+
+# setup redirection
+sudo sed -i "/server_name/ a \\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
+sudo service nginx restart
