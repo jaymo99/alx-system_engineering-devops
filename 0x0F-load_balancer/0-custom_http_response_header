@@ -6,12 +6,8 @@ apt-get -y install nginx
 ufw allow 'Nginx HTTP'
 apt-get -y install curl
 
-# Assign ownership to the account that we are currently signed in to
-chown -R "$USER":"$USER" /var/www/html
-chmod -R 755 /var/www
-
 # Add a custom HTTP header
-sed -i "/http {/ a\\\tadd_header X-served-By $hostname;" /etc/nginx/nginx.conf
+sed -i "/http {/ a\\\tadd_header X-served-By \$hostname;" /etc/nginx/nginx.conf
 
 # index.html content
 echo "Hello World!" > /var/www/html/index.html
