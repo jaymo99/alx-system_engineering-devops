@@ -8,6 +8,7 @@ file { 'index.html' :
   ensure  => present,
   path    => '/var/www/html/index.html',
   content => 'Hello World!',
+  require => Package['nginx'],
 }
 
 # Create custom 404.html file
@@ -15,6 +16,7 @@ file { '404.html' :
   ensure  => present,
   path    => '/var/www/html/404.html',
   content => 'Ceci n\'est pas une page',
+  require => Package['nginx'],
 }
 
 file_line { '404_error_page':
@@ -43,6 +45,6 @@ service { 'nginx':
 
 # Restart NGINX service
 exec { 'restart_nginx':
-  command     => 'service nginx restart',
+  command     => '/usr/sbin/service nginx restart',
   refreshonly => true,
 }
