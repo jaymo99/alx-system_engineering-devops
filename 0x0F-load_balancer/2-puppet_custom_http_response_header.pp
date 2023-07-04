@@ -11,15 +11,6 @@ file { 'index.html' :
   require => Package['nginx'],
 }
 
-# Add a custom HTTP header
-file_line { 'custom_http_header':
-  path    => '/etc/nginx/nginx.conf',
-  after   => 'http {',
-  line    => "\tadd_header X-Served-By \$hostname;",
-  notify  => Exec['restart_nginx'],
-  require => Package['nginx'],
-}
-
 # Create custom 404.html file
 file { '404.html' :
   ensure  => present,
@@ -31,7 +22,7 @@ file { '404.html' :
 file_line { '404_error_page':
   path    => '/etc/nginx/sites-available/default',
   after   => 'server_name _;',
-  line    => "\terror_page 404 /404.html;",
+  line    => 'error_page 404 /404.html;',
   notify  => Exec['restart_nginx'],
   require => File['404.html'],
 }
@@ -40,9 +31,18 @@ file_line { '404_error_page':
 file_line { 'nginx-redirection-rule':
   path    => '/etc/nginx/sites-available/default',
   after   => 'server_name _;',
-  line    => "\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;",
+  line    => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
   notify  => Exec['restart_nginx'],
   require => File['index.html'],
+}
+
+# Add a custom HTTP header
+file_line { 'custom_http_header':
+  path    => '/etc/nginx/nginx.conf',
+  after   => 'http {',
+  line    => 'add_header X-Served-By $hostname;',
+  notify  => Exec['restart_nginx'],
+  require => Package['nginx'],
 }
 
 # NGINX service
