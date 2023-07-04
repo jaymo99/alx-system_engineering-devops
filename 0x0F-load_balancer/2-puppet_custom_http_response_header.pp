@@ -56,4 +56,5 @@ service { 'nginx':
 exec { 'restart_nginx':
   command     => '/usr/sbin/service nginx restart',
   refreshonly => true,
+  require => Package['nginx'],
 }
