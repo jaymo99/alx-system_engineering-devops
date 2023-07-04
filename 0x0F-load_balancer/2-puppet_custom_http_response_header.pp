@@ -1,6 +1,11 @@
 # Installation and Configuration of Nginx in Ubuntu
+exec { 'update':
+  command => '/usr/bin/env apt-get -y update',
+}
+
 package { 'nginx' :
-  ensure => installed,
+  ensure  => installed,
+  require => Exec['update'],
 }
 
 # Create index.html file
@@ -9,31 +14,6 @@ file { 'index.html' :
   path    => '/var/www/html/index.html',
   content => 'Hello World!',
   require => Package['nginx'],
-}
-
-# Create custom 404.html file
-file { '404.html' :
-  ensure  => present,
-  path    => '/var/www/html/404.html',
-  content => 'Ceci n\'est pas une page',
-  require => Package['nginx'],
-}
-
-file_line { '404_error_page':
-  path    => '/etc/nginx/sites-available/default',
-  after   => 'server_name _;',
-  line    => 'error_page 404 /404.html;',
-  notify  => Exec['restart_nginx'],
-  require => File['404.html'],
-}
-
-# Add redirection rule
-file_line { 'nginx-redirection-rule':
-  path    => '/etc/nginx/sites-available/default',
-  after   => 'server_name _;',
-  line    => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
-  notify  => Exec['restart_nginx'],
-  require => File['index.html'],
 }
 
 # Add a custom HTTP header
