@@ -14,7 +14,7 @@ file { 'index.html' :
 # Add a custom HTTP header
 file_line { 'custom_http_header':
   path    => '/etc/nginx/nginx.conf',
-  after   => 'server_name _;',
+  after   => 'http {',
   line    => "\tadd_header X-Served-By \$hostname;",
   notify  => Exec['restart_nginx'],
   require => Package['nginx'],
