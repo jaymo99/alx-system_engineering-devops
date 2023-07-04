@@ -1,14 +1,18 @@
 # Installation and Configuration of Nginx in Ubuntu
+exec { 'update':
+  command => '/usr/bin/env apt-get -y update',
+}
+
 package { 'nginx' :
-  ensure => installed,
+  ensure  => installed,
+  require => Exec['update'],
 }
 
 # Add a custom HTTP header
 file_line { 'http_header':
   path    => '/etc/nginx/nginx.conf',
   after   => 'http {',
-  line    => 'add_header X-Served-By \$hostname;',
-  notify  => Exec['restart_nginx'],
+  line    => "\tadd_header X-Served-By ${hostname};",
   require => Package['nginx'],
 }
 
