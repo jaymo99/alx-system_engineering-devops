@@ -23,6 +23,6 @@ echo -e "" >> "$haproxy_config"
 echo -e "backend web-backend" >> "$haproxy_config"
 echo -e "\tbalance roundrobin" >> "$haproxy_config"
 echo -e "\tserver web-01 100.26.213.68:80 check" >> "$haproxy_config"
-echo -e "\tserver web-02 35.153.50.104:80 check" >> "$haproxy_config"
+echo -e "\tserver web-02 35.175.63.17:80 check" >> "$haproxy_config"
 
 service haproxy restart
