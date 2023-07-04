@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 # Configures NGINX on a new Ubuntu machine
 
-apt-get -y update
-apt-get -y install nginx
-ufw allow 'Nginx HTTP'
-apt-get -y install curl
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+sudo apt-get -y install curl
 
 # Add a custom HTTP header
-sed -i "/http {/ a\\\tadd_header X-served-By \$hostname;" /etc/nginx/nginx.conf
+sudo sed -i "/http {/ a\\\tadd_header X-Served-By \$hostname;" /etc/nginx/nginx.conf
 
 # index.html content
-echo "Hello World!" > /var/www/html/index.html
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
 # setup redirection
-sed -i "/server_name _/ a \\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
+sudo sed -i "/server_name _/ a \\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
 
 # custom error 404 page
-echo "Ceci n'est pas une page" > /var/www/html/404.html
-sed -i "/server_name _;/ a\\\terror_page 404 /404.html;" /etc/nginx/sites-available/default 
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+sudo sed -i "/server_name _;/ a\\\terror_page 404 /404.html;" /etc/nginx/sites-available/default 
 
 service nginx restart
