@@ -1,20 +1,27 @@
 #!/usr/bin/env bash
 # Displays information about subdomains.
 # shellcheck disable=SC2086
+
+dns_lookup () {
+	dns_result=$(dig "$1" | grep -A1 'ANSWER SECTION:')
+	awk -v sub_d=$subdomain '{ getline; print "The subdomain " sub_d " is a " $4 " record and points to " $NF}' <<< $dns_result
+}
+
+show_dig ()
+{
+    echo -n "The subdomain ""$2"
+    dig "$2"".""$1" +noall +answer | awk 'NF==5 {print " is a", $(NF-1), "record and points to", $NF}'
+}
+
 if [ -n "$2" ]; then
 	subdomains=$2
 else
 	subdomains=("www" "lb-01" "web-01" "web-02")
 fi
 
-lookup_dns () {
-	dns_result=$(dig "$1" | grep -A1 'ANSWER SECTION:')
-	awk -v sub_d=$subdomain '{ getline; print "The subdomain " sub_d " is a " $4 " record and points to " $NF}' <<< $dns_result
-}
-
 if [ -n "$1" ]; then
 	domain=$1
 	for subdomain in "${subdomains[@]}";do
-		lookup_dns "$subdomain"."$domain"
+		show_dig "$1" "$subdomain"
 	done
 fi
