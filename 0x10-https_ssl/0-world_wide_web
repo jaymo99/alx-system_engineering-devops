@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 # Displays information about subdomains.
-# shellcheck disable=SC2086
-
-if [ -z "$1" ]; then
-	echo "Usage: ./$(basename $0) [domain] [subdomain]"
-	exit 0
-fi
-
-domain=$1
 if [ -n "$2" ]; then
 	subdomains=$2
 else
@@ -19,6 +11,9 @@ lookup_dns () {
 	awk -v sub_d=$subdomain '{ getline; print "The subdomain " sub_d " is a " $4 " record and points to " $NF}' <<< $dns_result
 }
 
-for subdomain in "${subdomains[@]}";do
-	lookup_dns "$subdomain"."$domain"
-done
+if [ -n "$1" ]; then
+	domain=$1
+	for subdomain in "${subdomains[@]}";do
+		lookup_dns "$subdomain"."$domain"
+	done
+fi
