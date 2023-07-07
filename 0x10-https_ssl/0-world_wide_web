@@ -16,6 +16,6 @@ fi
 if [ -n "$1" ]; then
 	domain=$1
 	for subdomain in "${subdomains[@]}";do
-		dns_lookup "$subdomain"."$domain"
+		dns_lookup "$subdomain.$domain"
 	done
 fi
