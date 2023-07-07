@@ -4,13 +4,7 @@
 
 dns_lookup () {
 	dns_result=$(dig "$1" | grep -A1 'ANSWER SECTION:')
-	awk -v sub_d=$subdomain '{ getline; print "The subdomain " sub_d " is a " $4 " record and points to " $NF}' <<< $dns_result
-}
-
-show_dig ()
-{
-    echo -n "The subdomain ""$2"
-    dig "$2"".""$1" +noall +answer | awk 'NF==5 {print " is a", $(NF-1), "record and points to", $NF}'
+	awk -v sub_d=$subdomain 'NF==5 {print "The subdomain " sub_d " is a " $4 " record and points to " $NF}' <<< $dns_result
 }
 
 if [ -n "$2" ]; then
@@ -22,6 +16,6 @@ fi
 if [ -n "$1" ]; then
 	domain=$1
 	for subdomain in "${subdomains[@]}";do
-		show_dig "$1" "$subdomain"
+		dns_lookup "$subdomain"."$domain"
 	done
 fi
