@@ -3,8 +3,9 @@
 # shellcheck disable=SC2086
 
 dns_lookup () {
-	dns_result=$(dig "$1" +noall +answer)
-	awk -v sub_d=$subdomain 'NF==5 {print "The subdomain", sub_d, "is a", $(NF-1), "record and points to", $NF}' <<< $dns_result
+	dns_result=$(dig "$1"".""$2" +noall +answer)
+	echo -n "The subdomain ""$1"
+	awk 'NF==5 {print " is a", $(NF-1), "record and points to", $NF}' <<< $dns_result
 }
 
 if [ -n "$2" ]; then
@@ -16,6 +17,6 @@ fi
 if [ -n "$1" ]; then
 	domain=$1
 	for subdomain in "${subdomains[@]}";do
-		dns_lookup "$subdomain.$domain"
+		dns_lookup "$subdomain" "$domain"
 	done
 fi
