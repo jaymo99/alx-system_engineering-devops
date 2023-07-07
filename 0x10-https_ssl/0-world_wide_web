@@ -4,7 +4,7 @@
 
 dns_lookup () {
 	dns_result=$(dig "$1" +noall +answer)
-	awk -v sub_d=$subdomain 'NF==5 {print "The subdomain " sub_d " is a " $4 " record and points to " $NF}' <<< $dns_result
+	awk -v sub_d=$subdomain 'NF==5 {print "The subdomain", sub_d, "is a", $(NF-1), "record and points to", $NF}' <<< $dns_result
 }
 
 if [ -n "$2" ]; then
