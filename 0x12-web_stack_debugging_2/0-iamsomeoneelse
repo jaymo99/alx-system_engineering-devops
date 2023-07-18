@@ -5,5 +5,5 @@ if [ -z "$1" ]; then
 fi
 
 if id -u "$1" >/dev/null 2>&1; then
-	sudo -u "$1" whoami
+	sudo -u "$1" 'whoami'
 fi
