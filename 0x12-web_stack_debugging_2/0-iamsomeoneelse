@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # run the whoami command under the user passed as an argument
 username="syslog"
-password="syslog"
 
 # Create syslog user with a home directory
 sudo useradd -m -s /bin/bash "$username"
