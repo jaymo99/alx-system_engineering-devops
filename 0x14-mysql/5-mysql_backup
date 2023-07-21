@@ -10,12 +10,11 @@ if [ -z "$1" ]; then
 fi
 
 TIMESTAMP=$(date +'%d-%m-%Y')
-MYSQL_ROOT_PASSWORD="$1"
 
-if mysqldump -u root -p"${MYSQL_ROOT_PASSWORD}" --all-databases > "backup.sql"
+if mysqldump -u root -p"$1" --all-databases > "backup.sql"
 then
     # Compress the backup
-    tar -czvf "$TIMESTAMP.tar.gz" backup.sql
+    tar -zcvf "$TIMESTAMP.tar.gz" backup.sql
 else
     echo "Error: MySQL backup failed."
 fi
