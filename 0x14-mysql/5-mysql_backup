@@ -1,0 +1,22 @@
+#!/bin/bash
+# Generates a MySQL dump and creates a compressed archive
+# -> The MySQL dump contains all MySQL databases
+
+# Check if the password argument is provided
+if [ -z "$1" ]; then
+    echo "Error: MySQL root password not provided."
+    echo "Usage: $0 <mysql_root_password>"
+    exit 1
+fi
+
+TIMESTAMP=$(date +'%d-%m-%Y')
+MYSQL_ROOT_PASSWORD="$1"
+
+if mysqldump -u root -p"${MYSQL_ROOT_PASSWORD}" --all-databases > "backup.sql"
+then
+    # Compress the backup
+    tar -czvf "$TIMESTAMP.tar.gz" backup.sql
+else
+    echo "Error: MySQL backup failed."
+fi
+
