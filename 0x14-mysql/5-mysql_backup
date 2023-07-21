@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Generates a MySQL dump and creates a compressed archive
 # -> The MySQL dump contains all MySQL databases
 
