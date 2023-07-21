@@ -9,13 +9,5 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-TIMESTAMP=$(date +'%d-%m-%Y')
-
-if mysqldump -u root -p"$1" --all-databases > "backup.sql"
-then
-    # Compress the backup
-    tar -zcvf "$TIMESTAMP.tar.gz" backup.sql
-else
-    echo "Error: MySQL backup failed."
-fi
-
+mysqldump -u root -p"$1" --all-databases > backup.sql
+tar -zcvf "$(date '+%d-%m-%Y').tar.gz" backup.sql
