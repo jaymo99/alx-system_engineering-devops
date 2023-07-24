@@ -6,7 +6,6 @@ import json
 import requests
 import sys
 
-
 url = 'https://jsonplaceholder.typicode.com'
 
 
