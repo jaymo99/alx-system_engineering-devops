@@ -73,8 +73,8 @@ if __name__ == "__main__":
         csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
         for task in todo_list:
             csv_row = [user.get('id'),
-                    user.get('username'),
-                    task.get('completed'),
-                    task.get('title')
-                    ]
+                       user.get('username'),
+                       task.get('completed'),
+                       task.get('title')
+                       ]
             csv_writer.writerow(csv_row)
