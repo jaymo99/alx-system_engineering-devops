@@ -77,4 +77,4 @@ if __name__ == "__main__":
         emp_tasks.append(tmp_task)
 
     with open(json_file, 'w') as json_file:
-        json.dump({emp_id: emp_tasks}, json_file, indent=4)
+        json.dump({emp_id: emp_tasks}, json_file)
