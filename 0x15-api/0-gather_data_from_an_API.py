@@ -3,9 +3,9 @@
 Uses a REST API to return info about an employees TODO list.
 '''
 import json
+import requests
 import sys
 
-import requests
 
 url = 'https://jsonplaceholder.typicode.com'
 
